@@ -50,17 +50,27 @@ public class Gerencia {
 
     ServerSocket server;
 
+    
+
     public void run(int porta, ArrayList<Node> listaNodes) throws IOException {
 
-        receber_Arquivo();
+        while (true) {
 
-        lerArquivo();
-        distribuirConteudo(listaNodes);
+            receber_Arquivo();
 
-        if (listaNodes.size() > 0) {
-            for (int i = 0; i < listaNodes.size(); i++) {
-                new Transmissor().envio(Integer.valueOf(listaNodes.get(i).getIp()), "RASP0" + i + ".txt");
+            lerArquivo();
+
+            if (listaNodes.size() > 0) {
+                distribuirConteudo(listaNodes); //FUNÇÃO PARA LER O ARQUIVO RECEBIDO DISTRIBUIR SEU CONTEÚDO PARA A QUANTIDADE DE NÓS CADASDTRADOS
+                for (int i = 0; i < listaNodes.size(); i++) {
+                    Transmissor trans = new Transmissor();
+                    //new Transmissor().envio(listaNodes.get(i).getIp(), listaNodes.get(i).getPorta(), "RASP0" + i + ".txt");
+                    trans.envio(listaNodes.get(i).getIp(), listaNodes.get(i).getPorta(), "RASP0" + i + ".txt");
+                    trans.recebeResposta(listaNodes.get(i).getIp(), listaNodes.get(i).getPorta(), "RASP0" + i + ".txt");
+                
+                }
             }
+            listaNodes.clear();
         }
 
     }
@@ -270,8 +280,7 @@ public class Gerencia {
         int indexPalavra = 0;
         boolean confere = false;
 
-        System.out.println(textox[1124999]);
-
+        //System.out.println(textox[1124999]);
         try {
             for (int a = 0; a < listaNodes.size(); a++) {
                 System.out.println("Indice Palavra: " + indexPalavra);
@@ -298,10 +307,12 @@ public class Gerencia {
 
     }
 
-    private void lerArquivo() {
+    private void lerArquivo() throws IOException {
 
         String INPUT_ZIP_FILE = ("zipado.zip");
-        String OUTPUT_FOLDER = ("C:\\Users\\pasid\\Documents\\NetBeansProjects\\MASTER_ARQTIGO_NEVOA");
+        String OUTPUT_FOLDER = ("C:\\Users\\pasid\\Documents\\NetBeansProjects\\MASTER_ARQTIGO_NEVOA\\dist");
+        //File arquivo = new File("");
+        //String OUTPUT_FOLDER = arquivo.getPath();
         unzipFile z = new unzipFile();
 
         z.unZipIt(INPUT_ZIP_FILE, OUTPUT_FOLDER);
@@ -352,10 +363,12 @@ public class Gerencia {
             byte[] buffer = new byte[tamanho];
             int lidos;
             //while ((lidos = in.read(buffer, 0, tamanho)) != -1) {
-            while ((lidos = in.read(buffer)) != -1){ 
-            //System.out.println(lidos);
+            while ((lidos = in.read(buffer)) != -1) {
+                //System.out.println(lidos);
                 out.write(buffer, 0, lidos);
                 out.flush();
+                return;
+
             }
 
             server.close();

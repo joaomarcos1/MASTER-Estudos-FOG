@@ -1,6 +1,5 @@
 package master_artigo_nevoa.master;
 
-
 import java.util.ArrayList;
 
 /*
@@ -8,7 +7,6 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Helbert Monteiro
@@ -18,13 +16,13 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Master
      */
-    
     ArrayList<Node> listaNodes = new ArrayList<>();
-    
+
     public Principal() {
         initComponents();
         jpNode.setVisible(false);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -179,7 +177,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCancelaNodeActionPerformed
 
     private void jbIniciaMasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIniciaMasterActionPerformed
-        new Conexao(listaNodes);
+       // new Conexao(listaNodes);
     }//GEN-LAST:event_jbIniciaMasterActionPerformed
 
     /**

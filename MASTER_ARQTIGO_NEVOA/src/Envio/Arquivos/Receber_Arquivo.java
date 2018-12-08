@@ -23,6 +23,7 @@ public class Receber_Arquivo {
     public static void main(String[] argss) throws IOException {
 
         try {
+            
             ServerSocket server = new ServerSocket(5000);
             System.out.println("Esperando Receber Arquivo...");
             Socket clSocket = server.accept();
