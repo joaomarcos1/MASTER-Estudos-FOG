@@ -5,7 +5,6 @@ package master_artigo_nevoa.master;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.google.gson.Gson;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,7 +23,6 @@ public class Transmissor {
     private OutputStream osSaida;
     private PrintWriter pwSaida;
     private Socket dispositivoCliente;
-    private Gson gson;
     private GeradorGrafico geradorGrafico;
 
     private String json;

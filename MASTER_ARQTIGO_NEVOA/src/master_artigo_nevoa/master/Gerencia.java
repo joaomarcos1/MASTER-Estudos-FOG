@@ -5,7 +5,6 @@ package master_artigo_nevoa.master;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,7 +35,7 @@ public class Gerencia {
     private int index, codigoCliente, codigoNode = 0;
     private String[] palavras;
 
-    private Gson gson;
+ 
     private Modelo modelo, modeloRetorno;
     private NodePalavra nodePalavra;
     private ArrayList<NodePalavra> listaNodePalavra;
