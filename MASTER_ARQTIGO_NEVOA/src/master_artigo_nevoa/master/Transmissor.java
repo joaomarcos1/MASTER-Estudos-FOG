@@ -23,14 +23,16 @@ public class Transmissor {
     private OutputStream osSaida;
     private PrintWriter pwSaida;
     private Socket dispositivoCliente;
-    private GeradorGrafico geradorGrafico;
+
 
     private String json;
 
-    ArrayList<Long> tempoInicio, tempoFim, diferenca = new ArrayList<>();
+    ArrayList<Long> tempoInicio = new ArrayList<>();
+    ArrayList<Long> tempoFim = new ArrayList<>();
+    ArrayList<Long> diferenca = new ArrayList<>();
 
     public void enviar(Modelo modelo, String ip, int porta, boolean teste) {
-        geradorGrafico = new GeradorGrafico();
+    
         try {
             //gson = new Gson();
             //json = gson.toJson(modelo);
@@ -73,7 +75,7 @@ public class Transmissor {
                     writer.write(f.getName() + "\n");
                     writer.flush();
                     int c;
-                    int tamanho = 99999999;
+                    int tamanho = 9999999;
                     byte[] buffer = new byte[tamanho];
                     int lidos = -1;
                     tempoInicio.add(System.currentTimeMillis());
@@ -82,7 +84,6 @@ public class Transmissor {
                     }
                 } catch (IOException | NumberFormatException a) {
                     System.out.println("MASTER: ERRO NO ENVIO DO ARQUIVO PARA NÓ IP: " + IP + "/ Porta: " + Porta + " - ERRO: " + a);
-
                 }
             }
         }
@@ -92,7 +93,7 @@ public class Transmissor {
     }
 
     public void recebeResposta(String IP, String Porta, String arquivos) throws IOException {
-        ServerSocket server = new ServerSocket(Integer.parseInt(Porta)); // PEGANDO O VALOR DA PORTA DO SOCKET CRIADO
+        ServerSocket server = new ServerSocket(Integer.parseInt(Porta)+1000); // PEGANDO O VALOR DA PORTA DO SOCKET CRIADO
         Socket clSocket = server.accept();
 
         Scanner entrada = new Scanner(clSocket.getInputStream());

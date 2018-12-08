@@ -35,7 +35,7 @@ public class Gerencia {
     private int index, codigoCliente, codigoNode = 0;
     private String[] palavras;
 
- 
+    
     private Modelo modelo, modeloRetorno;
     private NodePalavra nodePalavra;
     private ArrayList<NodePalavra> listaNodePalavra;
@@ -309,9 +309,9 @@ public class Gerencia {
     private void lerArquivo() throws IOException {
 
         String INPUT_ZIP_FILE = ("zipado.zip");
-        String OUTPUT_FOLDER = ("C:\\Users\\pasid\\Documents\\NetBeansProjects\\MASTER_ARQTIGO_NEVOA\\dist");
+        //String OUTPUT_FOLDER = ("C:\\Users\\pasid\\Documents\\NetBeansProjects\\MASTER_ARQTIGO_NEVOA\\dist");
         //File arquivo = new File("");
-        //String OUTPUT_FOLDER = arquivo.getPath();
+        String OUTPUT_FOLDER = "./";
         unzipFile z = new unzipFile();
 
         z.unZipIt(INPUT_ZIP_FILE, OUTPUT_FOLDER);

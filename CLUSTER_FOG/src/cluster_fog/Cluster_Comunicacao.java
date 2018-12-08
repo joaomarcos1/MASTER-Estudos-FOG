@@ -73,8 +73,8 @@ public class Cluster_Comunicacao {
                     out.write(buffer, 0, lidos);
                     out.flush();
                     //
-                    contagemPalavras(quantidade);
-                    return;
+                    //contagemPalavras(quantidade);
+                    //return;
                 }
 
                 server.close();

@@ -32,7 +32,8 @@ public class criarLOG_tempoProcessamento {
         for (i = 0; i < inicio.size(); i++) {
             //gravarArq.printf("| %2d X %d = %2d |%n", i, n, (i * n));
             diferenca = fim.get(i) - inicio.get(i);
-            gravarArq.printf(diferenca+" %n");
+            //gravarArq.printf(diferenca+" %n");
+            gravarArq.append(Long.toString(diferenca)+"%n");
         }
         //gravarArq.printf("+-------------+%n");
 

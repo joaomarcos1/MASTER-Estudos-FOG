@@ -24,8 +24,9 @@ public class Conexao {
         
         for (int i = 0; i < args.length; i=+2) {
             Node node = new Node();
-            node.setPorta(String.valueOf(args[i]));
-            node.setIp(String.valueOf(args[i+1]));
+            node.setIp(String.valueOf(args[i]));
+            node.setPorta(String.valueOf(args[i+1]));
+            
             listaNodes.add(node);
 
         }
