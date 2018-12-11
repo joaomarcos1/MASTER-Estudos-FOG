@@ -24,7 +24,6 @@ public class Transmissor {
     private PrintWriter pwSaida;
     private Socket dispositivoCliente;
 
-
     private String json;
 
     ArrayList<Long> tempoInicio = new ArrayList<>();
@@ -32,7 +31,7 @@ public class Transmissor {
     ArrayList<Long> diferenca = new ArrayList<>();
 
     public void enviar(Modelo modelo, String ip, int porta, boolean teste) {
-    
+
         try {
             //gson = new Gson();
             //json = gson.toJson(modelo);
@@ -66,6 +65,27 @@ public class Transmissor {
             @Override
             public void run() {
                 try {
+
+                    File f = new File(arquivo);
+                    System.out.println("Lendo Arquivo...");
+                    FileInputStream in = new FileInputStream(f);
+                    Socket socket = new Socket(IP, Integer.parseInt(Porta));
+                    OutputStream out = socket.getOutputStream();
+                    OutputStreamWriter osw = new OutputStreamWriter(out);
+                    BufferedWriter writer = new BufferedWriter(osw);
+                    writer.write(f.getName() + "\n");
+                    writer.flush();
+                    int c;
+                    int tamanho = 9999999; //
+                    byte[] buffer = new byte[tamanho];
+                    int lidos = -1;
+                    System.out.println("Enviando Arquivo...");
+                    while ((lidos = in.read(buffer, 0, tamanho)) != -1) {
+                        out.write(buffer, 0, lidos);
+                    }
+                    System.out.println("Arquivo Enviado!");
+
+                    /*
                     File f = new File(arquivo);
                     FileInputStream in = new FileInputStream(f);
                     Socket socket = new Socket(IP, Integer.parseInt(Porta));
@@ -82,6 +102,7 @@ public class Transmissor {
                     while ((lidos = in.read(buffer, 0, tamanho)) != -1) {
                         out.write(buffer, 0, lidos);
                     }
+                    */
                 } catch (IOException | NumberFormatException a) {
                     System.out.println("MASTER: ERRO NO ENVIO DO ARQUIVO PARA NÓ IP: " + IP + "/ Porta: " + Porta + " - ERRO: " + a);
                 }
@@ -93,7 +114,7 @@ public class Transmissor {
     }
 
     public void recebeResposta(String IP, String Porta, String arquivos) throws IOException {
-        ServerSocket server = new ServerSocket(Integer.parseInt(Porta)+1000); // PEGANDO O VALOR DA PORTA DO SOCKET CRIADO
+        ServerSocket server = new ServerSocket(Integer.parseInt(Porta) + 1000); // PEGANDO O VALOR DA PORTA DO SOCKET CRIADO
         Socket clSocket = server.accept();
 
         Scanner entrada = new Scanner(clSocket.getInputStream());
@@ -101,7 +122,7 @@ public class Transmissor {
         long info = entrada.nextLong();
 
         tempoFim.add(info);
-        
+
         criarLOG_tempoProcessamento tempo = new criarLOG_tempoProcessamento();
         tempo.GerarLOG_tempoProcessamento(tempoInicio, tempoFim, IP, Porta, arquivos);
 

@@ -42,11 +42,11 @@ public class Cluster_Comunicacao {
                 ServerSocket server = new ServerSocket(5000);
                 System.out.println("Esperando Receber Arquivo...");
                 Socket clSocket = server.accept();
-                
+
                 //PEGANDO O IP E PORTA DA MAQUINA QUE SE CONECTOU
-                ip = clSocket.getInetAddress().getHostAddress();   
+                ip = clSocket.getInetAddress().getHostAddress();
                 porta = clSocket.getPort();
-                
+
                 InputStream in = clSocket.getInputStream();
                 InputStreamReader isr = new InputStreamReader(in);
                 BufferedReader reader = new BufferedReader(isr);
@@ -68,14 +68,18 @@ public class Cluster_Comunicacao {
                 out.flush();
             }
                  */
-                while ((lidos = in.read(buffer)) != -1) {
+                //while ((lidos = in.read(buffer)) != -1) {
+                while ((lidos = in.read(buffer, 0, tamanho)) != -1) {
                     //System.out.println(lidos);
-                    out.write(buffer, 0, lidos);
-                    out.flush();
-                    //
-                    //contagemPalavras(quantidade);
-                    //return;
+                    out.write(buffer, 1, lidos);
+
                 }
+                
+                 out.flush();  
+                 
+
+                                    
+
 
                 server.close();
                 clSocket.close();
@@ -178,7 +182,7 @@ public class Cluster_Comunicacao {
     }
 
     public void enviaResposta() throws IOException {
-        Socket cliente = new Socket(ip, (porta+1000));
+        Socket cliente = new Socket(ip, (porta + 1000));
         //int retorno = contaPalavras(texto);
 
         //IMPRIMINDO CONTAGEM DE PALAVRAS

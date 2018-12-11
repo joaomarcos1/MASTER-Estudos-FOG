@@ -358,7 +358,7 @@ public class Gerencia {
             //File f1 = new File("C:\\Users\\pasid\\Music\\" + fName);
             File f1 = new File(fName);
             FileOutputStream out = new FileOutputStream(f1);
-            int tamanho = 99999999;
+            int tamanho = 9999999;
             byte[] buffer = new byte[tamanho];
             int lidos;
             //while ((lidos = in.read(buffer, 0, tamanho)) != -1) {
